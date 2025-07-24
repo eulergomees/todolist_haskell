@@ -1,7 +1,6 @@
 module Main where
-    
-import System.Exit
 
+import System.Exit
 
 
 data Task = Task String deriving(Show)
@@ -24,7 +23,10 @@ menu task = do
         "3" -> do 
             putStrLn"3"
         "4" -> do       
-             exitWith ExitSuccess
+             exitSuccess
+        _ -> do
+            putStrLn"Opção invalida!"
+            menu[]
 
 main::IO()
 main = do

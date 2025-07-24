@@ -1,2 +1,3 @@
-# todolist_haskell
-To do list using Haskell
+# To Do List using Haskell
+
+
