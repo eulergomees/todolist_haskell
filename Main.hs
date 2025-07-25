@@ -3,30 +3,41 @@ module Main where
 import System.Exit
 
 
-data Task = Task String deriving(Show)
+data Tarefa = Tarefa String deriving(Show)
+
+adicionarTarefa :: [Tarefa] -> IO [Tarefa]
+adicionarTarefa tarefas = do
+    putStrLn "Digite a descrição da nova tarefa:"
+    desc <- getLine
+    let novaTarefa = Tarefa desc
+    return (tarefas ++ [novaTarefa])
 
 
 
-menu:: [Task]->IO()
-menu task = do
-    putStrLn "1 - Adicionar tarefa"
-    putStrLn "2 - Remover tarefa"
-    putStrLn "3 - Exibir tarefa"
-    putStrLn "4 - Sair"
-    putStrLn " Escolha uma opção:"
-    op <- getLine
-    case op of
+menu :: [Tarefa] -> IO ()
+menu tarefas = do
+    putStrLn "---Menu---"
+    putStrLn "1. Adicionar tarefa"
+    putStrLn "2. Remover tarefa"
+    putStrLn "3. Exibir tarefas"
+    putStrLn "4. Sair"
+    putStrLn "Escolha uma opção:"
+    opcao <- getLine
+    case opcao of
         "1" -> do
-            putStrLn"1"
+            novasTarefas <- adicionarTarefa tarefas
+            menu novasTarefas
         "2" -> do
             putStrLn"2"
-        "3" -> do 
+        "3" -> do
             putStrLn"3"
-        "4" -> do       
-             exitSuccess
-        _ -> do
-            putStrLn"Opção invalida!"
-            menu[]
+        "4" -> do
+            putStrLn "Saindo do programa"
+            exitSuccess
+        _   -> do
+            putStrLn "Opção inválida!"
+            menu tarefas
+
 
 main::IO()
 main = do
